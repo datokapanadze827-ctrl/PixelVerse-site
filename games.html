@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PixelVerse - თამაშების მონიშვნა</title>
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        .games-selection-container { max-width: 500px; margin: 50px auto; background: #1e293b; padding: 30px; border-radius: 12px; color: white; box-shadow: 0 5px 15px rgba(0,0,0,0.3); font-family: sans-serif; }
+        .checkbox-group { display: flex; align-items: center; background: #0f172a; padding: 15px; margin: 10px 0; border-radius: 8px; border: 1px solid #334155; cursor: pointer; }
+        .save-btn { background: #00bcd4; color: white; border: none; padding: 12px; width: 100%; border-radius: 8px; cursor: pointer; font-weight: bold; margin-top: 20px; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">Pixel<span>Verse</span></div>
+        <nav>
+            <ul>
+                <li><a href="site.html">მთავარი</a></li>
+                <li><a href="register.html">რეგისტრაცია</a></li>
+                <li><a href="games.html" class="active">თამაშების მონიშვნა</a></li>
+                <li><a href="profile.html">ჩემი პროფილი</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="games-selection-container">
+            <h2>🎮 მონიშნე შენი თამაშები</h2>
+            <form id="gamesForm">
+                <div class="checkbox-group"><input type="checkbox" id="minecraft" value="Minecraft"><label>Minecraft</label></div>
+                <div class="checkbox-group"><input type="checkbox" id="fortnite" value="Fortnite"><label>Fortnite</label></div>
+                <div class="checkbox-group"><input type="checkbox" id="gtav" value="GTA V"><label>Grand Theft Auto V</label></div>
+                <div class="checkbox-group"><input type="checkbox" id="roblox" value="Roblox"><label>Roblox</label></div>
+                <div class="checkbox-group"><input type="checkbox" id="cs2" value="CS2"><label>Counter-Strike 2</label></div>
+                <button type="submit" class="save-btn">არჩევანის შენახვა 💾</button>
+            </form>
+        </div>
+    </main>
+
+    <script>
+        // 1. დაცვა: თუ რეგისტრაცია არ არის, არ გაუშვა გვერდზე
+        if (!localStorage.getItem("isRegistered")) {
+            alert("გთხოვთ, ჯერ გაიარეთ რეგისტრაცია!");
+            window.location.href = "register.html";
+        }
+
+        // 2. შენახვის ლოგიკა
+        document.getElementById("gamesForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            let selectedGames = [];
+            if (document.getElementById("minecraft").checked) selectedGames.push("Minecraft");
+            if (document.getElementById("fortnite").checked) selectedGames.push("Fortnite");
+            if (document.getElementById("gtav").checked) selectedGames.push("GTA V");
+            if (document.getElementById("roblox").checked) selectedGames.push("Roblox");
+            if (document.getElementById("cs2").checked) selectedGames.push("CS2");
+
+            localStorage.setItem("myGames", JSON.stringify(selectedGames));
+
+            alert("არჩევანი შენახულია!");
+            // გადამისამართება პროფილზე
+            window.location.href = "profile.html";
+        });
+    </script>
+</body>
+</html>
